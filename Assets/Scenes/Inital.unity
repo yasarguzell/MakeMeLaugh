@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 956875362}
-  transitionTime: 2
+  transitionTime: 1
   sceneIndex: 0
 --- !u!114 &1087528715
 MonoBehaviour:

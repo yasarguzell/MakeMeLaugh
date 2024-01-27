@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2c357852da7d20740852b9a26e56b916
+guid: 13c070460e944b0488bbebfa0f9673df
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,85 +110,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: deneme1idle_0
+      name: deneme1idle 1_0
       rect:
         serializedVersion: 2
         x: 16
         y: 4
         width: 16
-        height: 30
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f75c2ae679df6341b05d12572dd4849
-      internalID: 544802978
+      spriteID: 97f2db62770a0254180b6ce01ca723d5
+      internalID: 1478400878
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: deneme1idle_1
+      name: deneme1idle 1_1
       rect:
         serializedVersion: 2
         x: 64
         y: 4
         width: 16
         height: 30
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66a9d0974f0aa3e4581cd41be9173512
-      internalID: 947142837
+      spriteID: 3e52588efad25644abee03164e8320c5
+      internalID: -688891026
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: deneme1idle_2
+      name: deneme1idle 1_2
       rect:
         serializedVersion: 2
         x: 112
         y: 4
         width: 16
         height: 30
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13297917006c9334c8a88df4fe54acb6
-      internalID: 1250057918
+      spriteID: 86f87e5d4a97f5e4cb686be2ec79278d
+      internalID: -592489330
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: deneme1idle_3
+      name: deneme1idle 1_3
       rect:
         serializedVersion: 2
         x: 160
         y: 4
         width: 16
-        height: 30
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: faba818bfb239ea4fba111a0bf1e55d3
-      internalID: 1081193228
+      spriteID: 69ad26b564e375846b4383d366f92526
+      internalID: 250472848
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      deneme1idle_0: 544802978
-      deneme1idle_1: 947142837
-      deneme1idle_2: 1250057918
-      deneme1idle_3: 1081193228
+      deneme1idle 1_0: 1478400878
+      deneme1idle 1_1: -688891026
+      deneme1idle 1_2: -592489330
+      deneme1idle 1_3: 250472848
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

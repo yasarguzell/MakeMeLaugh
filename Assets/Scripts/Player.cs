@@ -5,14 +5,19 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public Vector3 moveSpeed = new Vector3(0.02f, 0.0f, 0.0f);
-    [SerializeField] public Vector3 jumpSpeed = new Vector3(0.0f, 1200f, 0.0f);
-    [SerializeField] public GameObject[] Prefabs;
-    [SerializeField] public float bulletspeed = 10f;
-    public GameObject bulletInst;
-    Rigidbody2D rb;
-    public bool facingRight;
-    public bool IsGrounded = false;
+    public float speed = 5f;
+    public float runSpeedMultiplier = 1.5f;
+    public float jumpForce = 10f;
+    public float bendAngle = 45f;
+    public Transform groundCheckPoint;
+    public LayerMask groundLayer;
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+    public Animator anim;
+    private Rigidbody2D rb;
+    private bool isGrounded;
+    private bool isFacingRight = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,56 +25,62 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
+        // Yürüme ve Koşma
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float moveSpeed = speed * horizontalInput * (Input.GetKey(KeyCode.LeftShift) ? runSpeedMultiplier : 1f);
+        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+        if (horizontalInput != 0f)
         {
-            transform.Translate(moveSpeed);
-            if (facingRight)
-            {
-                facingRight = false;
-                Flip();
-            }
+            anim.SetBool("isWalking", true);
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (moveSpeed != 0f)
         {
-            transform.Translate(moveSpeed);
-            if (!facingRight)
-            {
-                facingRight = true;
-                Flip();
-            }
+            anim.SetBool("isRunning", true);
         }
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
-        {
-            rb.AddForce(jumpSpeed);
-            IsGrounded = false;
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (facingRight)
-            {
-                var bulletInst = Instantiate(Prefabs[0], transform.position + new Vector3(-.01f, 0, 0), Quaternion.identity);
-                bulletInst.GetComponent<Rigidbody2D>().velocity = new Vector2(-bulletspeed, 0f);
-            }
-            else
-            {
-                var bulletInst = Instantiate(Prefabs[0], transform.position + new Vector3(.01f, 0, 0), Quaternion.identity);
-                bulletInst.GetComponent<Rigidbody2D>().velocity = new Vector2(bulletspeed, 0f);
-            }
 
+        // Zemin Kontrolü (Raycast kullanarak)
+        isGrounded = Physics2D.Raycast(groundCheckPoint.position, Vector2.down, 0.1f, groundLayer);
+        float verticalInput = Input.GetAxis("Vertical");
+
+        // Zıplama
+        if (isGrounded && (Input.GetButtonDown("Jump") || verticalInput > 0))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            anim.SetBool("isJumping", true);
+        }
+
+        // Eğilme
+        if (verticalInput < 0)
+        {
+            anim.SetBool("isBending", true);
 
         }
 
+        // Ateş Etme
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Attack();
+            //anim.SetBool("isAttacking", true);
+
+        }
+
+        // Karakter Yönü
+        if (horizontalInput > 0 && !isFacingRight || horizontalInput < 0 && isFacingRight)
+        {
+            Flip();
+        }
     }
+
+    void Attack()
+    {
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    }
+
     void Flip()
     {
-        transform.Rotate(0, 180, 0);
+        isFacingRight = !isFacingRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Ground")
-        {
-            IsGrounded = true;
-        }
-    }
-
 }

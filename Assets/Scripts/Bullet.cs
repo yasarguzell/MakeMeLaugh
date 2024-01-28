@@ -7,12 +7,18 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int life = 3;
-
-    private void Awake() {
+    public Rigidbody2D rbody;
+    private void Awake()
+    {
         Destroy(gameObject, life);
     }
-    private void OnCollisionEnter2D(Collision2D other) {
-        Destroy(other.gameObject);
-        Destroy(gameObject); 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.collider.tag == "Enemy")
+        {
+
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
     }
 }

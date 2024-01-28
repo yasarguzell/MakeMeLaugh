@@ -22,7 +22,10 @@ public class Hospital : MonoBehaviour
         isStarted = true;
         yield return new WaitForSeconds(1.5f);
         dialogue.StartDialogue();
+
+
         /*
+        
         //buraya secenekler gelecek
         //secenek sectikten sonra tekrar diyalog gelecek
         yield return new WaitForSeconds(3);
@@ -31,9 +34,10 @@ public class Hospital : MonoBehaviour
         //secenek sectikten sonra tekrar diyalog gelecek*/
         while (!dialogue.dialogueFinished)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
         }
         SceneManagerLoad.Instance.LoadNextScene();
+        StopAllCoroutines();
     }
 
 }

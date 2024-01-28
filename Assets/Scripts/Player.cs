@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public Transform groundCheckPoint;
     public LayerMask groundLayer;
     public Transform firePoint;
-    public GameObject bulletPrefab;
+    public Bullet bulletPrefab;
     public Animator anim;
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -25,42 +25,45 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // Yürüme ve Koşma
+        
         float horizontalInput = Input.GetAxis("Horizontal");
         float moveSpeed = speed * horizontalInput * (Input.GetKey(KeyCode.LeftShift) ? runSpeedMultiplier : 1f);
         rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-        if (horizontalInput != 0f)
+        if (horizontalInput != 0f && isGrounded)
         {
             anim.SetBool("isWalking", true);
+            Invoke("ChangeBoolWalk", 1f);
         }
-        if (moveSpeed != 0f)
+        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
         {
             anim.SetBool("isRunning", true);
+            Invoke("ChangeBoolRun", 1f);
         }
 
-        // Zemin Kontrolü (Raycast kullanarak)
-        isGrounded = Physics2D.Raycast(groundCheckPoint.position, Vector2.down, 0.1f, groundLayer);
         float verticalInput = Input.GetAxis("Vertical");
 
         // Zıplama
         if (isGrounded && (Input.GetButtonDown("Jump") || verticalInput > 0))
         {
+            isGrounded = false;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             anim.SetBool("isJumping", true);
+            Invoke("ChangeBoolJump", 1f);
         }
 
         // Eğilme
         if (verticalInput < 0)
         {
             anim.SetBool("isBending", true);
-
+            Invoke("ChangeBoolBend", 1f);
         }
 
         // Ateş Etme
         if (Input.GetButtonDown("Fire1"))
         {
             Attack();
-            //anim.SetBool("isAttacking", true);
+            anim.SetBool("isAttacking", true);
+            Invoke("ChangeBoolAttack", 1f);
 
         }
 
@@ -71,9 +74,39 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ChangeBoolJump()
+    {
+        anim.SetBool("isJumping", false);
+    }
+    public void ChangeBoolAttack()
+    {
+        anim.SetBool("isAttacking", false);
+    }
+    public void ChangeBoolWalk()
+    {
+        anim.SetBool("isWalking", false);
+    }
+    public void ChangeBoolBend()
+    {
+        anim.SetBool("isBending", false);
+    }
+    public void ChangeBoolRun()
+    {
+        anim.SetBool("isRunning", false);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+    }
+
     void Attack()
     {
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.rbody.AddForce(new Vector2(100f, bullet.rbody.velocity.y));
     }
 
     void Flip()

@@ -19,6 +19,7 @@ public class Player1 : MonoBehaviour
     private bool isGrounded;
     private bool isFacingRight = true;
     public int sugarCount = 0;
+    public bool finish;
 
     void Start()
     {
@@ -66,9 +67,14 @@ public class Player1 : MonoBehaviour
             Flip();
         }
 
-        if(sugarCount > 40)
+        if (sugarCount > 40)
         {
-            SceneManagerLoad.Instance.LoadNextScene();
+            if (!finish)
+            {
+                finish = true;
+                SceneManagerLoad.Instance.LoadNextScene();
+
+            }
         }
     }
 

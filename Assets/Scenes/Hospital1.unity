@@ -779,19 +779,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1090289206}
   lines:
-  - 'Sick: Hello doc.'
+  - 'Yusuf: Hello doc.'
   - 'Doctor: Oh, look who''s back for more mental acrobatics. How can I assist you
     in turning your life into a three-ring circus today?'
-  - 'Sick: Hah. At least one of us having some fun.'
+  - 'Yusuf: Hah. At least one of us having some fun.'
   - 'Doctor: Well, isn''t someone the life of the party? I''m here to sprinkle a
     bit of psychological wisdom on your misery. What''s on your mind?'
-  - 'Sick: I have a gambling addiction that led my life into misery. Even door bell
+  - 'Yusuf: I have a gambling addiction that led my life into misery. Even door bell
     ring triggers my urge to chase the jackpot. I can''t even smile without the thrill
     of gambling anymore.  I need your help doc. '
   - 'Doctor: Ah, a gambling addiction. Because who needs financial stability when
     you can have the excitement of watching your life savings disappear? Let''s try
     to salvage what''s left, shall we? '
-  - 'Sick: Make me laugh doc.....'
+  - 'Yusuf: Make me laugh doc.....'
   textSpeed: 0.1
   hospital: {fileID: 2053544608}
   dialogueFinished: 0

@@ -7,9 +7,9 @@ public class NumberManager : MonoBehaviour
 {
     public static NumberManager Instance;
 
-    
+
     [SerializeField] private int number = 0;
-    public TextMeshPro numberText; 
+    public TextMeshProUGUI numberText;
 
     private void Awake()
     {
@@ -37,11 +37,11 @@ public class NumberManager : MonoBehaviour
 
     void UpdateNumberText()
     {
-        // numberText.text = "Number: " + number.ToString();
+        numberText.text = "Number: " + number.ToString() + "/15";
         if (number >= 15)
         {
             SceneManagerLoad.Instance.LoadNextScene();
         }
-        
+
     }
 }

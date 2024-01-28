@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -20,6 +21,7 @@ public class Player1 : MonoBehaviour
     private bool isFacingRight = true;
     public int sugarCount = 0;
     public bool finish;
+    public TextMeshProUGUI numberText;
 
     void Start()
     {
@@ -112,6 +114,7 @@ public class Player1 : MonoBehaviour
         {
             sugarCount++;
             collision.gameObject.SetActive(false);
+            numberText.text = "Number: " + sugarCount.ToString() + "/40";
         }
     }
 

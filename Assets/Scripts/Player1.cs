@@ -60,6 +60,7 @@ public class Player1 : MonoBehaviour
         if (verticalInput < 0)
         {
             anim.SetBool("isBending", true);
+            Invoke("ChangeBoolBend", 1f);
         }
 
 
@@ -96,7 +97,7 @@ public class Player1 : MonoBehaviour
     {
         anim.SetBool("isBending", false);
     }
-    public void ChangeBoolRun(string name, bool value)
+    public void ChangeBoolRun()
     {
         anim.SetBool("isRunning", false);
     }
@@ -113,6 +114,7 @@ public class Player1 : MonoBehaviour
         if (collision.tag == "Sugar")
         {
             sugarCount++;
+            AudioManager.Instance.PlaySFX("sugar");
             collision.gameObject.SetActive(false);
             numberText.text = "Number: " + sugarCount.ToString() + "/40";
         }
